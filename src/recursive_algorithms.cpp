@@ -154,16 +154,24 @@ int arraySumIterative(const std::vector<int>& array) {
     return sum;
 }
 
+namespace {
+void reverseArrayRecursive(std::vector<int>& array, std::size_t left, std::size_t right) {
+    if (left >= right) {
+        return;
+    }
+    std::swap(array[left], array[right]);
+    reverseArrayRecursive(array, left + 1, right - 1);
+}
+}
+
 // TODO: Implement recursive in-place reversal.
 // Base case: size <= 1.
 // Recursive case: swap first and last elements, then recurse on the remaining middle.
 void reverseArray(std::vector<int>& array) {
-    if (array.size() <= 1) 
-    {
+    if (array.size() <= 1) {
         return;
     }
-    std::swap(array[0], array[array.size() - 1]);
-    reverseArray(std::vector<int>(array.begin() + 1, array.end() - 1));
+    reverseArrayRecursive(array, 0, array.size() - 1);
 }
 
 // TODO: Implement iterative reverse comparison.
